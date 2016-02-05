@@ -13,8 +13,8 @@
     ],
     "minimum-stability": "stable",
     "support": {
-        "source": "https://github.com/dpodium/sms-api",
-        "issues": "https://github.com/dpodium/sms-api/issues"
+        "source": "https://github.com/darrenng-dpodium/sms-api",
+        "issues": "https://github.com/darrenng-dpodium/sms-api/issues"
     },
     "require": {
         "php": ">=5.5.0",
