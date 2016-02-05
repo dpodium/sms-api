@@ -54,3 +54,4 @@ Mobile Ace - N/A
 
 ## Footnotes
 We are not affiliated with the SMS Gateway API Providers in any way. Usage of their services are subjected to their charges which are borne by user using the service.
+
