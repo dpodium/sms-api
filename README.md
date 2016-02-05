@@ -47,7 +47,9 @@ For more information and options, see \dpodium\smsapi\components\SmsManager and 
 
 ## Providers
 CM - https://www.smsgateway.to/en
+
 Clickatell - https://www.clickatell.com/
+
 Mobile Ace - N/A
 
 ## Footnotes
