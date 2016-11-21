@@ -30,7 +30,7 @@ abstract class SmsProvider {
     
     protected function post($url, $data) {
         try {
-            $response = $this->guzzle->post($url, ['forms_param' => $data]);
+            $response = $this->guzzle->post($url, ['form_params' => $data]);
         } catch (\GuzzleHttp\Exception\ClientException $ex) {
             $response = $ex->getResponse();
         }
