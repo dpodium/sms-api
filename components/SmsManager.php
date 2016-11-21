@@ -174,7 +174,7 @@ class SmsManager {
     
     protected function initHttpTransport(&$cfg) {
         // If proxy configuration exists, create default Guzzle with Proxy setting
-        $guzzle = new \GuzzleHttp\Client(!empty($this->proxy) ? [
+        $guzzle = new \GuzzleHttp\Client(!empty($this->proxy['host']) ? [
             'proxy' => $this->proxy['host'] . ':' . $this->proxy['port'],
         ] : []);
         $cfg['__guzzle'] = $guzzle;
