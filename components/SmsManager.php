@@ -89,12 +89,12 @@ class SmsManager {
      */
     public $proxy = null;
     
-    private $dial_code;
-    private $phone;
-    private $provider;
+    protected $dial_code;
+    protected $phone;
+    protected $provider;
     
     /** @var \dpodium\smsapi\abstracts\SmsProvider */
-    private $service;
+    protected $service;
     
     /**
      * @return string the provider identifier used / to be used
