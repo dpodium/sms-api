@@ -37,6 +37,15 @@ abstract class SmsProvider {
         return $this->parseResponse($response);
     }
     
+    protected function postBody($url, $data) {
+        try {
+            $response = $this->guzzle->post($url, ['body' => $data]);
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            $response = $ex->getResponse();
+        }
+        return $this->parseResponse($response);
+    }
+    
     protected function get($url, $data) {
         try {
             $response = $this->guzzle->get($url, ['query' => $data]);

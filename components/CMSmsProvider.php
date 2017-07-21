@@ -39,7 +39,7 @@ class CMSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
         }
         $mobile_no = $dial_code . $phone;
         $xml = $this->buildMessageXml($mobile_no, $message);
-        $result = $this->post($this->send_url, $xml);
+        $result = $this->postBody($this->send_url, $xml);
         return true;
     }
     
