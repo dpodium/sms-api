@@ -2,6 +2,8 @@
 
 namespace dpodium\smsapi\components;
 
+use \Exception;
+
 /**
  * This main entry point for Sms sending. Usage:
  * 
