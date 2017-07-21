@@ -109,18 +109,18 @@ class SmsManager {
      * @param string $phone The local number, eg: 123456789
      * @return \dpodium\smsapi\components\SmsManager this
      */
-    public function setPhone($dial_code, $phone) {
+    public function setPhone($dial_code, $phone, $provider = null) {
         //Convert int to str
         $this->dial_code = '' . $dial_code;
         $this->phone = '' . $phone;
         
-        $this->initService();
+        $this->initService($provider);
         return $this;
     }
     
-    protected function initService() {
+    protected function initService($provider) {
         //We normalize the config first,
-        $cfg = $this->getProviderConfig();
+        $cfg = $this->getProviderConfig($provider);
         //And then we get the provider class,
         $clazz = $this->getProviderClass($cfg);
         //And then we create the Guzzle HTTP transport
@@ -129,25 +129,38 @@ class SmsManager {
         $this->service = new $clazz($cfg);
     }
     
-    protected function getProviderConfig() {
-        $this->provider = $this->default_provider;
+    protected function getProviderConfig($selected_provider) {
         $cfg_providers = isset($this->config[$this->dial_code]) ? $this->config[$this->dial_code] : null;
+        if (isset($selected_provider) && !isset($cfg_providers[$selected_provider]) && !isset($this->config['*'][$selected_provider])) {
+            throw new Exception(sprintf('Configured provider not found for dialing code - %s - %s', $this->dial_code, $selected_provider));
+        }
         if (!isset($cfg_providers)) {
             $cfg_providers = $this->config['*'];
+            if (!isset($selected_provider)) {
+                //If using generic config and no provider selected, use default provider
+                $selected_provider = $this->default_provider;
+            }
         } else {
             foreach($cfg_providers as $provider => $cfg) {
                 if (isset($this->config['*'][$provider])) {
                     $cfg_providers[$provider] = $this->config['*'][$provider] + $cfg;
                 }
             }
-            //Use the first provider found. That is the configured provider for this dial code
-            reset($cfg_providers);
-            $this->provider = key($cfg_providers);
+            if (isset($selected_provider)) {
+                if (!isset($cfg_providers[$selected_provider])) {
+                    $cfg_providers[$selected_provider] = $this->config['*'][$selected_provider];
+                }
+            } else {
+                //Use the first provider found. That is the configured provider for this dial code
+                reset($cfg_providers);
+                $selected_provider = key($cfg_providers);
+            }
         }
-        if (!isset($cfg_providers[$this->provider])) {
-            throw new Exception('Configured provider not found - ' . $this->provider);
+        if (!isset($cfg_providers[$selected_provider])) {
+            throw new Exception(sprintf('Default provider not found for dialing code - %s - %s', $this->dial_code, $selected_provider));
         }
-        $cfg = $cfg_providers[$this->provider];
+        $this->provider = $selected_provider;
+        $cfg = $cfg_providers[$selected_provider];
         return $cfg;
     }
     
