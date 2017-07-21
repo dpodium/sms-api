@@ -28,6 +28,8 @@ class SmsManager {
         'cm' => CMSmsProvider::class,
         'clickatell' => ClickatellSmsProvider::class,
         'mobileace' => MobileAceSmsProvider::class,
+        'twilio' => TwilioSmsProvider::class,
+        'moreify' => MoreifySmsProvider::class,
     ];
     
     /**
