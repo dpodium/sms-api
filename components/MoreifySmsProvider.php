@@ -28,7 +28,7 @@ class MoreifySmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
     
     public function sendSms($dial_code, $phone, $message) {
         if (empty($this->project) || empty($this->password)) {
-            throw new Exception('SmsProvider mandatory configuration not filled in');
+            throw new \Exception('SmsProvider mandatory configuration not filled in');
         }
         $mobile_no = $dial_code . $phone;
         
@@ -41,7 +41,12 @@ class MoreifySmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
 
         $result = $this->post($this->send_url, $post_array);
         $json = !empty($result['body']) ? json_decode($result['body'], true) : [];
-        return isset($json) && isset($json['success']) && $json['success'];
+        if (isset($json) && isset($json['success']) && $json['success']) {
+            return true;
+        } else {
+            throw new \Exception('Moreify failed to send sms: ' . json_encode($result));
+        }
+        return ;
     }
 
 }
