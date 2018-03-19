@@ -32,6 +32,7 @@ class SmsManager {
         'mobileace' => MobileAceSmsProvider::class,
         'twilio' => TwilioSmsProvider::class,
         'moreify' => MoreifySmsProvider::class,
+        'firemobile' => FireMobileSmsProvider::class,
     ];
     
     /**
