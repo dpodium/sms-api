@@ -2,7 +2,7 @@
 
 namespace dpodium\smsapi\components;
 
-class FireMobileSmsProvider extends dpodium\smsapi\abstracts\SmsProvider {
+class FireMobileSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
 
     /**
      * @var string Optional - SMS Gateway URL
