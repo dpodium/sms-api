@@ -109,6 +109,13 @@ class SmsManager {
     }
     
     /**
+     * @return string the provider identifier used / to be used
+     */
+    public function getService(){
+        return $service;
+    }
+    
+    /**
      * 
      * @param string $dial_code Country dial code, eg: 60
      * @param string $phone The local number, eg: 123456789

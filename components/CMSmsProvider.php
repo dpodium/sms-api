@@ -39,7 +39,17 @@ class CMSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
         }
         $mobile_no = $dial_code . $phone;
         $xml = $this->buildMessageXml($mobile_no, $message);
-        $result = $this->postBody($this->send_url, $xml);
+        
+        $contact = array('country_no' => $dial_code, 'contact_no' => $phone);
+        $this->prev_request = json_encode(array_merge($xml, $contact));
+        $this->api_name = 'sendSms';
+        try {
+             $result = $this->postBody($this->send_url, $xml);
+            $this->prev_response = json_encode($result);
+        } catch (\Exception $ex) {
+            $this->prev_response = json_encode(['code' => $ex->getCode(), 'message' => $ex->getMessage()]);
+        }
+//        $result = $this->postBody($this->send_url, $xml);
         return true;
     }
     
