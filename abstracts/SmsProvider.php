@@ -28,27 +28,27 @@ abstract class SmsProvider {
         }
     }
     
-    protected function post($url, $data) {
+    protected function post($url, $data, $guzzle_configs = []) {
         try {
-            $response = $this->guzzle->post($url, ['form_params' => $data]);
+            $response = $this->guzzle->post($url, array_merge(isset($guzzle_configs) ? $guzzle_configs : [], ['form_params' => $data]));
         } catch (\GuzzleHttp\Exception\ClientException $ex) {
             $response = $ex->getResponse();
         }
         return $this->parseResponse($response);
     }
     
-    protected function postBody($url, $data) {
+    protected function postBody($url, $data, $guzzle_configs = []) {
         try {
-            $response = $this->guzzle->post($url, ['body' => $data]);
+            $response = $this->guzzle->post($url, array_merge(isset($guzzle_configs) ? $guzzle_configs : [], ['body' => $data]));
         } catch (\GuzzleHttp\Exception\ClientException $ex) {
             $response = $ex->getResponse();
         }
         return $this->parseResponse($response);
     }
     
-    protected function get($url, $data) {
+    protected function get($url, $data, $guzzle_configs = []) {
         try {
-            $response = $this->guzzle->get($url, ['query' => $data]);
+            $response = $this->guzzle->get($url, array_merge(isset($guzzle_configs) ? $guzzle_configs : [], ['query' => $data]));
         } catch (\GuzzleHttp\Exception\ClientException $ex) {
             $response = $ex->getResponse();
         }
