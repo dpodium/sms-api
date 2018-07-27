@@ -37,10 +37,10 @@ class FireMobileSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
             'gw-text' => $message
         );
 
-        $result = $this->get($this->send_url, $post_array);
+        $result = $this->get($this->send_url, $post_array, [
+            //Use firemobile's cert
+            'verify' => dirname(__FILE__) . '/../cert/firemobile-11044441.crt',
+        ]);
         return true;
     }
-
-    
-
 }
