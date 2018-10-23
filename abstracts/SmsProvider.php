@@ -13,6 +13,11 @@ abstract class SmsProvider {
     
     protected $guzzle;
     
+    public $api_name;
+    public $prev_request;
+    public $prev_response;
+    
+    
     public abstract function sendSms($dial_code, $phone, $message);
     
     public function __construct($config) {

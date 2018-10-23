@@ -38,8 +38,18 @@ class MoreifySmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
             'phonenumber' => $mobile_no,
             'message' => $message,
         );
+        
+        $contact = array('country_no' => $dial_code, 'contact_no' => $phone);
+        $this->prev_request = json_encode(array_merge($post_array, $contact));
+        $this->api_name = 'sendSms';
+        try {
+            $result = $this->post($this->send_url, $post_array);
+            $this->prev_response = json_encode($result);
+        } catch (\Exception $ex) {
+            $this->prev_response = json_encode(['code' => $ex->getCode(), 'message' => $ex->getMessage()]);
+        }
 
-        $result = $this->post($this->send_url, $post_array);
+//        $result = $this->post($this->send_url, $post_array);
         $json = !empty($result['body']) ? json_decode($result['body'], true) : [];
         if (isset($json) && isset($json['success']) && $json['success']) {
             return true;
