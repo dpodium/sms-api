@@ -2,7 +2,7 @@
 
 namespace dpodium\smsapi\components;
 
-class FireMobileSmsProvider extends dpodium\smsapi\abstracts\SmsProvider {
+class FireMobileSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
 
     /**
      * @var string Optional - SMS Gateway URL
@@ -15,16 +15,11 @@ class FireMobileSmsProvider extends dpodium\smsapi\abstracts\SmsProvider {
     public $send_id;
 
     /**
-     * @var string Mandatory - sender identifier
-     */
-    public $from = '';
-
-    /**
      * @var array Mandatory - Send Pwd
      */
     public $send_pwd;
 
-    public function sendSms($dial_code, $phone, $message) {
+    public function sendSms($sender_name,$dial_code, $phone, $message) {
         if (empty($this->send_id) || empty($this->send_pwd)) {
             throw new Exception('SmsProvider mandatory configuration not filled in');
         }
@@ -32,7 +27,7 @@ class FireMobileSmsProvider extends dpodium\smsapi\abstracts\SmsProvider {
         $post_array = array(
             'gw-username' => $this->send_id,
             'gw-password' => $this->send_pwd,
-            'gw-from' => $this->from,
+            'gw-from' => $sender_name,
             'gw-to' => $mobile_no,
             'gw-text' => $message
         );

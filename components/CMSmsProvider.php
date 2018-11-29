@@ -33,7 +33,7 @@ class CMSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
      */
     public $product_token;
 
-    public function sendSms($dial_code, $phone, $message) {
+    public function sendSms($sender_name,$dial_code, $phone, $message) {
         if (empty($this->product_token) || empty($this->from)) {
             throw new Exception('SmsProvider mandatory configuration not filled in');
         }
