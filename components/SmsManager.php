@@ -100,6 +100,7 @@ class SmsManager {
     
     /** @var \dpodium\smsapi\abstracts\SmsProvider */
     protected $service;
+    protected $sender_name;
     
     /**
      * @return string the provider identifier used / to be used
@@ -113,6 +114,11 @@ class SmsManager {
      */
     public function getService(){
         return $service;
+    }
+    
+    public function setSenderName($sender_name){
+        $this->sender_name = ''. $sender_name;
+        return $this;
     }
     
     /**

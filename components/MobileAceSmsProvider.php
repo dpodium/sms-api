@@ -33,7 +33,7 @@ class MobileAceSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
      */
     public $send_pwd;
 
-    public function sendSms($dial_code, $phone, $message) {
+    public function sendSms($sender_name,$dial_code, $phone, $message) {
         if (empty($this->send_id) || empty($this->send_pwd)) {
             throw new \Exception('SmsProvider mandatory configuration not filled in');
         }

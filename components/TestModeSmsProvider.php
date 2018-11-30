@@ -11,7 +11,7 @@ namespace dpodium\smsapi\components;
  */
 class TestModeSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
     
-    public function sendSms($dial_code, $phone, $message) {
+    public function sendSms($sender_name,$dial_code, $phone, $message) {
         return true;
     }
 }

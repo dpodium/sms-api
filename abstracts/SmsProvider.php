@@ -18,7 +18,7 @@ abstract class SmsProvider {
     public $prev_response;
     
     
-    public abstract function sendSms($dial_code, $phone, $message);
+    public abstract function sendSms($sender_name,$dial_code, $phone, $message);// add $sender_name
     
     public function __construct($config) {
         if (!isset($config['__guzzle'])) {

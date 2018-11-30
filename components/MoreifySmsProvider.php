@@ -26,7 +26,7 @@ class MoreifySmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
      */
     public $password;
     
-    public function sendSms($dial_code, $phone, $message) {
+    public function sendSms($sender_name,$dial_code, $phone, $message) {
         if (empty($this->project) || empty($this->password)) {
             throw new \Exception('SmsProvider mandatory configuration not filled in');
         }
