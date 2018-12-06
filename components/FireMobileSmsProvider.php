@@ -19,6 +19,11 @@ class FireMobileSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
      */
     public $send_pwd;
 
+    /**
+     * @var string Mandatory - sender identifier
+     */
+    public $from = '';
+
     public function sendSms($sender_name,$dial_code, $phone, $message) {
         if (empty($this->send_id) || empty($this->send_pwd)) {
             throw new Exception('SmsProvider mandatory configuration not filled in');
@@ -27,7 +32,7 @@ class FireMobileSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
         $post_array = array(
             'gw-username' => $this->send_id,
             'gw-password' => $this->send_pwd,
-            'gw-from' => $sender_name,
+            'gw-from' => $this->from, //Need firemobile to whitelist the name, so we cannot just use sender_name dynamically
             'gw-to' => $mobile_no,
             'gw-text' => $message
         );
