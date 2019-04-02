@@ -26,7 +26,7 @@ class FireMobileSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
 
     public function sendSms($sender_name,$dial_code, $phone, $message) {
         if (empty($this->send_id) || empty($this->send_pwd)) {
-            throw new Exception('SmsProvider mandatory configuration not filled in');
+            throw new \Exception('SmsProvider mandatory configuration not filled in');
         }
         $mobile_no = $dial_code . $phone;
         $post_array = array(
