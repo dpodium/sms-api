@@ -11,8 +11,13 @@ namespace dpodium\smsapi\components;
  */
 class TestModeSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
     
-    public function sendSms($sender_name,$dial_code, $phone, $message) {
-        $this->prev_request = 'test';
+    public function sendSms($sender_name, $dial_code, $phone, $message) {
+        $this->prev_request = [
+            'sender_name' => $sender_name,
+            'dial_code' => $dial_code,
+            'phone' => $phone,
+            'message' => $message,
+        ];
         $this->api_name = 'test';
         $this->prev_response = 'test';
         return true;
