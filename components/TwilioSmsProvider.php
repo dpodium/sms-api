@@ -33,10 +33,17 @@ class TwilioSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
         $mobile_no = $dial_code . $phone;
         $client = new \Twilio\Rest\Client($this->sid, $this->token);
 
-        $client->messages->create($mobile_no, [
+        $params = [
             'from' => $this->sender_num,
             'body' => $message
-        ]);
+        ];
+        $this->prev_request = json_encode(array_merge([
+            'mobile_no' => $mobile_no,
+        ], $params));
+        $this->api_name = 'sendSms';
+        
+        $client->messages->create($mobile_no, $params);
+        $this->prev_response = json_encode([]);
         return true;
     }
 
