@@ -48,6 +48,7 @@ class CMSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
             $this->prev_response = json_encode($result);
         } catch (\Exception $ex) {
             $this->prev_response = json_encode(['code' => $ex->getCode(), 'message' => $ex->getMessage()]);
+            return false;
         }
 //        $result = $this->postBody($this->send_url, $xml);
         return true;
