@@ -215,7 +215,7 @@ class SmsManager {
         if (!isset($this->phone)) {
             throw new Exception('Phone number not set');
         }
-        $flag = $this->service->sendSms($this->dial_code, $this->phone, $message);
+        $flag = $this->service->sendSms($this->sender_name, $this->dial_code, $this->phone, $message);
         return $flag;
     }
 }

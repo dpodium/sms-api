@@ -26,11 +26,11 @@ class TwilioSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
      */
     public $sender_num;
     
-    public function sendSms($sender_name,$dial_code, $phone, $message) {
+    public function sendSms($sender_name, $dial_code, $phone, $message) {
         if (empty($this->sid) || empty($this->token) || empty($this->sender_num)) {
             throw new Exception('SmsProvider mandatory configuration not filled in');
         }
-        $mobile_no = $dial_code . $phone;
+        $mobile_no = '+' . $dial_code . $phone;
         $client = new \Twilio\Rest\Client($this->sid, $this->token);
 
         $params = [
