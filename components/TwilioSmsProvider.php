@@ -42,8 +42,9 @@ class TwilioSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
         ], $params));
         $this->api_name = 'sendSms';
         
-        $client->messages->create($mobile_no, $params);
-        $this->prev_response = json_encode([]);
+        /* @var $response \Twilio\Rest\Api\V2010\Account\MessageInstance */
+        $response = $client->messages->create($mobile_no, $params);
+        $this->prev_response = json_encode($response->toArray());
         return true;
     }
 
