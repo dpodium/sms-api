@@ -42,8 +42,8 @@ class FireMobileSmsProvider extends \dpodium\smsapi\abstracts\SmsProvider {
         $this->api_name = 'sendSms';
         try {
             $result = $this->post($this->send_url, $post_array, [
-                //Use firemobile's cert
-                'verify' => dirname(__FILE__) . '/../cert/gw_https_2021.cer',
+                //Do not verify host for now
+                'verify' => false,
             ]);
             $this->prev_response = json_encode($result);
         } catch (\Exception $ex) {
